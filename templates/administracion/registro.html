@@ -1,0 +1,23 @@
+
+{% extends 'index.html' %}
+
+{% load static %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-center" style="min-height: 70vh;">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Registro de Usuario</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Registrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,156 @@
+{% load static %}
+{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Registro - Recetas Online</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'styles.css' %}" rel="stylesheet" />
+    <style>
+        .register-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .register-header {
+            text-align: center;
+            margin-bottom: 0px;
+        }
+        .register-header img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        .register-form .form-group {
+            margin-bottom: 15px;
+        }
+        .register-form .form-control {
+            width: 100%;
+        }
+        .register-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .register-form .btn {
+            width: 100%;
+        }
+    </style>
+</head>
+<body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="/">Recetas Online</a>
+            <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                {% if request.user.is_authenticated %}
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/admin/">Ingresar</a></li>
+                </ul>
+                {% else %}
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/registro/">Registrarse</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/admin/">Ingresar</a></li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <!-- Masthead-->
+    <header class="masthead bg-primary text-dark text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <div class="register-container">
+                <div class="register-header">
+                    <h2>Registro de Usuario</h2>
+                    <img src="{% static 'img/logo.png' %}" alt="Registro">
+                </div>
+                <form method="post" class="register-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.username.label_tag }}
+                        {{ form.username }}
+                        {% if form.username.errors %}
+                        <div class="text-danger">{{ form.username.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                        <div class="text-danger">{{ form.email.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password1.label_tag }}
+                        {{ form.password1 }}
+                        {% if form.password1.errors %}
+                        <div class="text-danger">{{ form.password1.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password2.label_tag }}
+                        {{ form.password2 }}
+                        {% if form.password2.errors %}
+                        <div class="text-danger">{{ form.password2.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Registrar</button>
+                </form>
+            </div>
+        </div>
+    </header>
+    <!-- Footer-->
+    <footer class="footer text-center">
+        <div class="container">
+            <div class="row">
+                <!-- Footer Location-->
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase mb-4">Desarrollado por</h4>
+                    <a href="https://excel-ente.net" target="_blank">
+                        <img src="{% static 'img/logo.png' %}" alt="Logo" class="img-fluid logo-foot">
+                    </a>
+                </div>
+                <!-- Footer Social Icons-->
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h4 class="text-uppercase mb-4">Redes Sociales</h4>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://www.youtube.com/@excel-ente" target="_blank"><i class="fab fa-fw fa-youtube"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://www.linkedin.com/in/kevinturkienich/" target="_blank"><i class="fab fa-fw fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://github.com/Excel-ente" target="_blank"><i class="fab fa-fw fa-github"></i></a>
+                    <a class="btn btn-outline-light btn-social mx-1" href="https://instagram.com/excel.entes" target="_blank"><i class="fab fa-fw fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Copyright Section-->
+    <div class="copyright py-4 text-center text-white">
+        <div class="container"><small>Copyright &copy; <a href="https://excel-ente.net">EXCEL-ENTE</a> 2024</small></div>
+    </div>
+    {% include 'modals.html' %}
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
